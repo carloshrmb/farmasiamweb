@@ -160,3 +160,4 @@ src/
 public/logo.png   placeholder — reemplazar
 ```
 
+
