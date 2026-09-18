@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+/* ───────────────────────────────────────────────────────────────────────────
+   Sistema de diseño Farmasiam — institucional / corporativo médico
+   Todos los colores derivan del logo real. Cambiando estos tokens se
+   re-tematiza el sitio completo.
+   ─────────────────────────────────────────────────────────────────────────── */
+@theme {
+  --font-sans: var(--font-plex), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: var(--font-source-serif), ui-serif, Georgia, Cambria,
+    "Times New Roman", Times, serif;
+
+  /* Morado institucional. Base = #6E1B8C (morado del logo). */
+  --color-brand-50: #f6f0f9;
+  --color-brand-100: #ebddf1;
+  --color-brand-200: #d9c0e4;
+  --color-brand-300: #be96d1;
+  --color-brand-400: #9e67b8;
+  --color-brand-500: #82409f;
+  --color-brand-600: #6e1b8c;
+  --color-brand-700: #5d1776;
+  --color-brand-800: #4b135f;
+  --color-brand-900: #3a0f4a;
+  --color-brand-950: #240a2e;
+
+  /* Extremos del degradado de marca. Solo para el wordmark y detalles
+     puntuales — nunca como fondo de secciones grandes. */
+  --color-brand-grad-from: #8b118f;
+  --color-brand-grad-to: #582489;
+  /* Los mismos tonos aclarados, para el wordmark sobre fondo oscuro:
+     el degradado original queda casi invisible sobre #241A2E. */
+  --color-brand-grad-from-dark: #cd63d1;
+  --color-brand-grad-to-dark: #9b7ede;
+
+  /* Neutros institucionales */
+  --color-ink-50: #faf8f6; /* fondo base, blanco cálido */
+  --color-ink-100: #f2eef4;
+  --color-ink-200: #e3dbe8; /* líneas y bordes finos */
+  --color-ink-300: #c8bcd0;
+  --color-ink-400: #a99db3;
+  --color-ink-500: #6b5e77; /* labels y metadata */
+  --color-ink-600: #574a63;
+  --color-ink-700: #4a3f53; /* párrafos */
+  --color-ink-800: #33293d;
+  --color-ink-900: #241a2e; /* barra superior, footer, títulos */
+
+  /* Esquinas rectas o casi rectas en todo el sitio */
+  --radius-card: 2px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* header (4.5rem) + franja de promocion (42px) + holgura */
+    scroll-padding-top: 8rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink-50);
+    color: var(--color-ink-700);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    color: var(--color-ink-900);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-600);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Eyebrow: label en mayúsculas con letter-spacing, color de acento. */
+@utility eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-brand-600);
+}
+
+/* Degradado de marca aplicado al texto del wordmark. */
+@utility text-brand-gradient {
+  background-image: linear-gradient(
+    to bottom,
+    var(--color-brand-grad-from),
+    var(--color-brand-grad-to)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Variante para fondos oscuros (footer). */
+@utility text-brand-gradient-dark {
+  background-image: linear-gradient(
+    to bottom,
+    var(--color-brand-grad-from-dark),
+    var(--color-brand-grad-to-dark)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Franja de marca: degradado horizontal para la linea superior del sitio. */
+@utility bg-brand-gradient {
+  background-image: linear-gradient(
+    to right,
+    var(--color-brand-grad-from),
+    var(--color-brand-grad-to)
+  );
+}
