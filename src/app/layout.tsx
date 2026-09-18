@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
+import { PromoBar } from "@/components/layout/PromoBar";
 import { Footer } from "@/components/layout/Footer";
 import { brand, contact, seo } from "@/content/site";
 
@@ -78,6 +79,7 @@ export default function RootLayout({
         </a>
         <div aria-hidden className="bg-brand-gradient h-1" />
         <Header />
+        <PromoBar />
         <main id="contenido">{children}</main>
         <Footer />
         <script

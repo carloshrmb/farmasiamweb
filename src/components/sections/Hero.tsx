@@ -17,12 +17,18 @@ export function Hero() {
 
       <Container className="relative z-10">
         <div className="max-w-2xl py-20 sm:py-24 lg:py-32">
-          <span className="inline-flex items-center gap-2 border border-white/30 px-3 py-1.5">
-            <Icon name="pulse" className="h-3.5 w-3.5 text-[#E3B8EA]" />
-            <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-white">
-              {hero.slogan}
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="inline-flex items-center gap-2 border border-white/30 px-3 py-1.5">
+              <Icon name="pulse" className="h-3.5 w-3.5 text-[#E3B8EA]" />
+              <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-white">
+                {hero.slogan}
+              </span>
             </span>
-          </span>
+
+            <span className="inline-flex items-center border border-amber-300/70 bg-amber-400/10 px-3 py-1.5 text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-amber-200">
+              25% de descuento en tienda
+            </span>
+          </div>
 
           <h1 className="mt-6 text-[2.125rem] leading-[1.12] text-white sm:text-[2.75rem] lg:text-[3.125rem]">
             {hero.title.before}
