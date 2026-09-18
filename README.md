@@ -159,3 +159,4 @@ src/
   lib/cn.ts       helper de clases
 public/logo.png   placeholder — reemplazar
 ```
+
