@@ -60,6 +60,14 @@ const paths: Record<IconName, React.ReactNode> = {
       <path d="M9.5 20v-5h5v5" />
     </>
   ),
+  franchise: (
+    <>
+      <path d="M3 21h18" />
+      <path d="M5 21V9l7-5 7 5v12" />
+      <path d="M10 21v-5h4v5" />
+      <path d="M12 8.5v4M10 10.5h4" />
+    </>
+  ),
   "shield-check": (
     <>
       <path d="M12 3 5 6v6c0 4.2 2.9 7.6 7 9 4.1-1.4 7-4.8 7-9V6l-7-3Z" />
@@ -106,6 +114,7 @@ const paths: Record<IconName, React.ReactNode> = {
   ),
   "chevron-left": <path d="m14.5 5-7 7 7 7" />,
   "chevron-right": <path d="m9.5 5 7 7-7 7" />,
+  close: <path d="M6 6l12 12M18 6 6 18" />,
 };
 
 export function Icon({ name, ...props }: SVGProps<SVGSVGElement> & { name: IconName }) {

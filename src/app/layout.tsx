@@ -3,17 +3,16 @@ import { IBM_Plex_Sans, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { PromoBar } from "@/components/layout/PromoBar";
+import { PromoModal } from "@/components/layout/PromoModal";
 import { Footer } from "@/components/layout/Footer";
 import { brand, contact, seo } from "@/content/site";
 
-/** Titulares: serif institucional. */
 const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-source-serif",
 });
 
-/** Texto y UI. */
 const plexSans = IBM_Plex_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -46,7 +45,6 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-/** Datos estructurados para que Google entienda el negocio local. */
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "MedicalBusiness",
@@ -80,6 +78,7 @@ export default function RootLayout({
         <div aria-hidden className="bg-brand-gradient h-1" />
         <Header />
         <PromoBar />
+        <PromoModal />
         <main id="contenido">{children}</main>
         <Footer />
         <script

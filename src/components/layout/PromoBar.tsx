@@ -2,11 +2,6 @@ import { Container } from "@/components/ui/Container";
 import { Icon } from "@/components/ui/Icon";
 import { promo } from "@/content/site";
 
-/**
- * Franja de promocion, mas protagonista: texto grande en negritas, sello
- * "Siempre" en amarillo (para dejar claro que no es oferta temporal) y CTA
- * como boton en vez de link subrayado.
- */
 export function PromoBar() {
   if (!promo.enabled) return null;
 

@@ -25,6 +25,7 @@ export type IconName =
   | "supplies"
   | "stethoscope"
   | "storefront"
+  | "franchise"
   | "shield-check"
   | "truck"
   | "clock"
@@ -34,7 +35,8 @@ export type IconName =
   | "map-pin"
   | "mail"
   | "chevron-left"
-  | "chevron-right";
+  | "chevron-right"
+  | "close";
 
 export type NavLink = {
   label: string;
