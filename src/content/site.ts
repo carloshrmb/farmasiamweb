@@ -25,7 +25,6 @@ export type IconName =
   | "supplies"
   | "stethoscope"
   | "storefront"
-  | "franchise"
   | "shield-check"
   | "truck"
   | "clock"
@@ -222,7 +221,7 @@ export const hero = {
     { label: "Ubicación", value: "Culiacán, Sinaloa" },
     { label: "Especialidad", value: "Terapia intensiva · Cirugía general" },
     { label: "Sucursales", value: "3 en Culiacán" },
-    { label: "Atendemos a", value: "Médicos, hospitales y franquicias" },
+    { label: "Atendemos a", value: "Médicos, hospitales y público en general" },
   ],
   /**
    * Fotografia del hero. Mientras sea null, la ficha se apoya en un bloque
@@ -313,7 +312,7 @@ export const audiences = {
   eyebrow: "Para quién",
   title: "A quién atendemos",
   subtitle:
-    "Un mismo proveedor para tres formas distintas de comprar insumo médico.",
+    "Un mismo proveedor para dos formas distintas de comprar insumo médico.",
   items: [
     {
       id: "medicos-hospitales",
@@ -332,15 +331,6 @@ export const audiences = {
       title: "Venta directa al público",
       description:
         "Atención en mostrador para pacientes y familiares que necesitan material de curación, insumos y equipo para cuidado en casa.",
-    },
-    {
-      id: "franquicias",
-      icon: "franchise",
-      image: "/images/franquicias_fachada.webp",
-      photo: true,
-      title: "Franquicias",
-      description:
-        "Modelo de franquicia para quien busca operar su propio punto de venta de insumos médicos con nuestro respaldo y abasto.",
     },
   ] satisfies Audience[],
 } as const;

@@ -11,7 +11,7 @@ export function Audiences() {
         subtitle={audiences.subtitle}
       />
 
-      <div className="mt-10 grid gap-6 md:grid-cols-3">
+      <div className="mt-10 grid gap-6 sm:grid-cols-2 md:max-w-3xl md:mx-auto">
         {audiences.items.map((item, i) => (
           <article key={item.id} className="border border-ink-200 bg-white">
             <div className="relative aspect-[4/3] overflow-hidden border-b border-ink-200 bg-brand-50">
