@@ -2,32 +2,88 @@
 
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
-import { contactSection, whatsappUrl } from "@/content/site";
+import { contactSection } from "@/content/site";
 
 const { form } = contactSection;
+
+/** Endpoint AJAX de Formsubmit: entrega los envios al correo de atencion. */
+const FORMSUBMIT_ENDPOINT =
+  "https://formsubmit.co/ajax/atencionclientes@siamculiacan.com";
+
+const SUCCESS_MESSAGE =
+  "¡Gracias! Tu mensaje fue enviado. Te contactaremos pronto.";
+const ERROR_MESSAGE =
+  "Hubo un problema al enviar. Intenta de nuevo en un momento.";
 
 const inputClass =
   "w-full rounded-[2px] border border-ink-200 bg-white px-3.5 py-2.5 text-[0.9375rem] text-ink-900 placeholder:text-ink-400 transition-colors focus:border-brand-600 focus:outline-none";
 
+/** Valida el formato del correo ademas del `type="email"` del navegador. */
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 /**
- * Formulario de contacto — TODAVIA SIN BACKEND.
+ * Formulario de contacto conectado a Formsubmit por AJAX.
  *
- * Para conectarlo mas adelante, reemplazar el cuerpo de `handleSubmit` por un
- * POST a un route handler (ej. src/app/api/contacto/route.ts) o a un servicio
- * externo (Resend, Formspree, etc.). El markup y los estados ya estan listos.
+ * El envio va como JSON al endpoint de arriba; Formsubmit reenvia el
+ * contenido al correo de atencion a clientes. El campo `_honey` es una
+ * trampa para bots: si llega con texto, el envio se descarta.
  */
 export function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle"
+  );
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    const formEl = event.currentTarget;
+    const data = new FormData(formEl);
+
+    // Trampa para bots: si viene llena, no se envia nada.
+    if (String(data.get("_honey") ?? "").trim() !== "") return;
+
+    const name = String(data.get("nombre") ?? "").trim();
+    const email = String(data.get("email") ?? "").trim();
+    const message = String(data.get("mensaje") ?? "").trim();
+
+    if (!name || !email || !message || !EMAIL_RE.test(email)) {
+      setStatus("error");
+      return;
+    }
+
     setStatus("sending");
 
-    // TODO: enviar los datos al backend cuando exista.
-    await new Promise((resolve) => setTimeout(resolve, 600));
+    try {
+      const response = await fetch(FORMSUBMIT_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          _subject: "Nuevo mensaje desde el sitio Farmasiam",
+          _template: "table",
+        }),
+      });
 
-    setStatus("sent");
-    event.currentTarget.reset();
+      const result = await response.json().catch(() => null);
+      const ok =
+        response.ok &&
+        String(result?.success ?? "").toLowerCase() === "true";
+
+      if (!ok) {
+        setStatus("error");
+        return;
+      }
+
+      formEl.reset();
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
   }
 
   if (status === "sent") {
@@ -48,7 +104,7 @@ export function ContactForm() {
           </svg>
         </span>
         <p className="mt-5 max-w-sm text-[0.9375rem] leading-relaxed text-ink-700">
-          {form.successMessage}
+          {SUCCESS_MESSAGE}
         </p>
         <button
           type="button"
@@ -110,24 +166,32 @@ export function ContactForm() {
           />
         </div>
 
+        {/* Trampa para bots: invisible para personas, tentadora para spam. */}
+        <input
+          type="text"
+          name="_honey"
+          defaultValue=""
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          className="hidden"
+        />
+
         <Button type="submit" size="lg" className="w-full" disabled={status === "sending"}>
           {status === "sending" ? "Enviando…" : form.submitLabel}
         </Button>
 
-        <p className="text-[0.75rem] leading-relaxed text-ink-500">{form.disclaimer}</p>
-
-        {/* Quitar este aviso cuando el formulario quede conectado */}
-        <p className="border-l-2 border-brand-600 bg-ink-50 px-3.5 py-3 text-[0.75rem] leading-relaxed text-ink-700">
-          {form.pendingBackendNote}{" "}
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-medium text-brand-700 underline underline-offset-2 hover:text-brand-800"
+        {status === "error" ? (
+          <p
+            role="status"
+            aria-live="polite"
+            className="border-l-2 border-brand-600 bg-ink-50 px-3.5 py-3 text-[0.75rem] leading-relaxed text-ink-700"
           >
-            Abrir WhatsApp
-          </a>
-        </p>
+            {ERROR_MESSAGE}
+          </p>
+        ) : null}
+
+        <p className="text-[0.75rem] leading-relaxed text-ink-500">{form.disclaimer}</p>
       </form>
     </div>
   );
