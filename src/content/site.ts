@@ -132,8 +132,8 @@ export const contact = {
     "Hola, me gustaría recibir información sobre sus insumos y equipo médico.",
   /** Correo de atención a clientes. */
   email: "atencionclientes@siamculiacan.com",
-  instagramHandle: "@farmasiam.mx",
-  instagramUrl: "https://instagram.com/farmasiam.mx",
+  instagramHandle: "@farmasiam_",
+  instagramUrl: "https://instagram.com/farmasiam_",
   /** Opcional: dejar en null si no aplica */
   facebookUrl: null as string | null,
 } as const;

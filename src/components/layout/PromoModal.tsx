@@ -37,20 +37,20 @@ export function PromoModal() {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-ink-900/70 p-4"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-ink-900/70 p-3 sm:p-6"
       onClick={close}
     >
       <div
-        className="relative w-full max-w-sm bg-white"
+        className="relative w-full max-w-xl bg-white"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           type="button"
           onClick={close}
           aria-label="Cerrar"
-          className="absolute -top-3 -right-3 flex h-8 w-8 items-center justify-center border border-ink-200 bg-white text-ink-700 transition-colors hover:text-brand-700"
+          className="absolute right-2 top-2 flex h-11 w-11 items-center justify-center rounded-full bg-white text-ink-800 shadow-[0_4px_14px_rgba(36,26,46,0.28)] transition-colors hover:bg-brand-600 hover:text-white sm:-right-4 sm:-top-4"
         >
-          <Icon name="close" className="h-4 w-4" />
+          <Icon name="close" className="h-5 w-5" strokeWidth={2} />
         </button>
 
         <Image

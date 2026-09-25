@@ -96,6 +96,17 @@ export function Footer() {
                   {contact.email}
                 </a>
               </li>
+              <li className="flex gap-2.5">
+                <Icon name="instagram" className="mt-0.5 h-4 w-4 shrink-0 text-brand-300" />
+                <a
+                  href={contact.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-white"
+                >
+                  {contact.instagramHandle}
+                </a>
+              </li>
             </ul>
           </div>
         </div>
