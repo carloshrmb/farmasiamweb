@@ -124,14 +124,14 @@ export const brand = {
 
 export const contact = {
   /** Formato humano, es lo que se muestra en pantalla. */
-  phoneDisplay: "667 716 55 54",
+  phoneDisplay: "667 204 2228",
   /** Formato E.164 para los enlaces tel: y wa.me */
-  phoneE164: "+526677165554",
-  whatsappNumber: "526677165554",
+  phoneE164: "+526672042228",
+  whatsappNumber: "526672042228",
   whatsappMessage:
     "Hola, me gustaría recibir información sobre sus insumos y equipo médico.",
-  /** TODO: copy cliente — confirmar correo oficial */
-  email: "contacto@farmasiam.mx",
+  /** Correo de atención a clientes. */
+  email: "atencionclientes@siamculiacan.com",
   instagramHandle: "@farmasiam.mx",
   instagramUrl: "https://instagram.com/farmasiam.mx",
   /** Opcional: dejar en null si no aplica */
@@ -188,7 +188,7 @@ export const promo = {
   message: " toda la semana, solo en Farmasiam",
   cta: {
     label: "Preguntar por WhatsApp",
-    href: "https://wa.me/526674894972",
+    href: "https://wa.me/526672042228",
   },
 } as const;
 
